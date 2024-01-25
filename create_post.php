@@ -1,8 +1,11 @@
 <?php
-// create_post.php
 include 'function.php';
 require_once "connect.php";
 session_start();
+
+if (!isset($_SESSION['loged']) || (string)$_SESSION['loged'] === '0') {
+    die(header('Location: login.php'));
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content = $_POST["content"];

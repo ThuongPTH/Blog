@@ -4,6 +4,7 @@ $username = "root";
 $password = "";
 $database = "blog";
 
+// connect với database
 $conn = mysqli_connect($host, $username, $password, $database);
 
 if ($conn->connect_error) {

@@ -17,30 +17,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Lấy các column của user trong database
     $user = get_username($username, $conn);
     
-    if($user['password'] === md5($password)){
+    if($password!=null && $user['password'] === md5($password)){
         $_SESSION['loged'] = true;
         $_SESSION['userId'] = $user['userId'] ;
+        $_SESSION['username'] = $user['username'];
         die(header('Location: admin.php'));
     }
     else{
         die('Invalid username or password <a href = "login.php"> login again </a>');
     }
-
-    // $stmt = $conn->prepare("SELECT id, username, stars FROM users WHERE username = ? AND password = ?");
-    // $stmt->bind_param("ss", $username, $password);
-    // $stmt->execute();
-    // $stmt->bind_result($user_id, $username, $stars);
-
-    // if ($stmt->fetch()) {
-    //     $_SESSION["userId"] = $user_id;
-    //     $_SESSION["username"] = $username;
-    //     $_SESSION["stars"] = $stars;
-    //     header("Location: dashboard.php");
-    // } else {
-    //     echo "Invalid username or password";
-    // }
-
-    // $stmt->close();
 }
 
 ?>

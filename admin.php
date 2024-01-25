@@ -12,45 +12,9 @@ if ((string)$_SESSION['loged'] === '1') {
     echo "Welcome, $username!";
     $posts = get_post($userId, $conn);
 } else die(header('Location: login.php'));
-
-// dashboard.php
-// session_start();
-// if (!isset($_SESSION["user_id"])) {
-//     header("Location: login.php");
-//     exit();
-// }
-
-// $user_id = $_SESSION["user_id"];
-// $username = $_SESSION["username"];
-// $stars = $_SESSION["stars"];
-
-// echo "Welcome, $username! Stars: $stars";
-// 
 ?>
 
-<!-- // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     if ($_POST['action'] === 'add' && $_POST['mission'] != null) {
-//         add_list($id, $_POST['mission'], $conn);
-//         header('Location: admin.php');
-//     }
-// }
 
-// if (isset($_GET['del'])) {
-//     $stt = (int)$_GET['del'];
-//     del_list($stt, $conn);
-//     header('Location: admin.php');
-// }
-
-// if (isset($_GET['edit'])) {
-//     $stt = (int)$_GET['edit'];
-// }
-
-// if (isset($_POST['action']) && $_POST['action'] === 'ok') {
-//     $update = $_POST['edit'];
-//     edit_list($update, $stt, $conn);
-//     header('Location: admin.php');
-// }
-?> -->
 <!DOCTYPE html>
 <html lang="en">
 

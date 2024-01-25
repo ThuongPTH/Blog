@@ -9,9 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = (string)$_POST["password"];
     $password2 = (string)$_POST['password2'];
     $email = (string)$_POST['email'];
-    if ($password != $password2) {
-        die('Sai passwork! Đăng ký không thành công <a href = "/register.php"> Resiter again </a>');
-    } else {
+    if($username==null || $email==null || $password==null){
+        die('Bạn cần điền đủ thông tin <a href = "register.php"> Resiter again </a>');
+    }
+    elseif ($password != $password2) {
+        die('Nhập lại sai passwork! Đăng ký không thành công <a href = "register.php"> Resiter again </a>');
+    } 
+    else {
         if (get_username($username, $conn) === null) {
             add_data($username, $password, $email, $conn);
             die(header('Location:login.php'));

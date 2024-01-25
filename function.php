@@ -1,18 +1,6 @@
 <?php
 require_once "connect.php";
 
-// function get_post($userId, $conn){
-//     $query = "SELECT posts.id, users.username, posts.content, posts.created_at, posts.title FROM posts
-//           JOIN users ON posts.userId = users.userId
-//           WHERE posts.is_public = 1 OR posts.userId = users.userId;
-//           ORDER BY posts.created_at DESC";
-
-//     $result = $conn->query($query);
-//     return $result;
-// }
-
-
-
 function add_post($title, $userId, $content, $is_public, $conn){
     $query = 'INSERT INTO posts (userId, title, content, is_public) VALUES (?, ?, ?, ?)';
     $exec = $conn->prepare($query);
@@ -106,4 +94,24 @@ function get_post($userId, $conn)
     $exec->execute();
     $result = $exec->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function change_pass($username, $newpass, $conn)
+{
+    $newpass= (string)md5($newpass);
+    $query = "UPDATE users SET password=? WHERE username=?";
+    $exec = $conn->prepare($query);
+    $exec->bind_param('ss',$newpass, $username);
+    $exec->execute();
+    return $exec->affected_rows;
+}
+
+
+function change_infor($username, $new_username, $new_email, $conn)
+{
+    $query = "UPDATE users SET username=?, email=? WHERE username=?";
+    $exec = $conn->prepare($query);
+    $exec->bind_param('sss',$new_username, $new_email, $username);
+    $exec->execute();
+    return $exec->affected_rows;
 }

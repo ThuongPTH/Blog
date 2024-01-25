@@ -20,7 +20,7 @@ if (isset($_SESSION['loged']) && $_SESSION['loged'] === true) {
     <h1> Chào mừng bạn đến với xíu xiu Blog </h1>
     <a href="register.php"><button>Register</button></a>
     <a href="login.php"><button>Login</button></a>
-    <a href="admin.php"><button>Guest Mode </button></a>
+    <!-- <a href="admin.php"><button>Guest Mode </button></a> -->
 </body>
 
 </html>
