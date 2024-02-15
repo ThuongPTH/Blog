@@ -8,7 +8,7 @@ include 'function.php';
 if (isset($_SESSION['loged']) && $_SESSION['loged'] === 'true') die(header('Location: /admin.php'));
 
 //
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+/* if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     //if ($_POST['action'] === 'register') die(header('Location: /register.php'));
     $username = $_POST["username"];
@@ -25,6 +25,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     else{
         die('Invalid username or password <a href = "login.php"> login again </a>');
+    }
+} */
+
+if ((isset($_POST['username']) && isset($_POST['password']))){
+    if(login($_POST['username'], $_POST['password'], $conn)){
+        $_SESSION['loged'] = true;
+        $user = get_username($_POST['username'], $conn);
+        $_SESSION['userId'] = $user['userId'];
+        $_SESSION['username'] = $_POST['username'];
+        die(header('Location: admin.php'));
     }
 }
 

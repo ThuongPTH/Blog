@@ -21,12 +21,28 @@ function add_data($username, $password, $email, $conn)
 
 function get_username($username, $conn)
 {
-    $query = 'select * from users where username=?';
-    $exec = $conn->prepare($query);
-    $exec->bind_param('s', $username);
-    $exec->execute();
-    $result = $exec->get_result();
+    // $query = 'select * from users where username=?';
+    // $exec = $conn->prepare($query);
+    // $exec->bind_param('s', $username);
+    // $exec->execute();
+    // $result = $exec->get_result();
+    // return $result->fetch_array(MYSQLI_ASSOC);
+    $query = "select * from users where username = '$username'";
+    $result = $conn->query($query);
+    if ($result === false) {
+        die('Error in executing the query: ' . $conn->error);
+    } 
     return $result->fetch_array(MYSQLI_ASSOC);
+}
+
+function login($username, $password, $conn){
+    $query = "SELECT * FROM users WHERE username = '$username' AND passsword=md5('$password')";
+    $result = $conn->query($query);
+    if($result){
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        if(isset($row['username'])) return true;
+    }
+    else die('Error in executing the query: ' . $conn->error);
 }
 
 function get_user($userId, $conn)
